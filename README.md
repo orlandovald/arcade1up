@@ -7,5 +7,5 @@ You can configure either or both, but the first step is to run the prerequistes.
 ssh into your Pi and run the below,
 
 ```bash
-curl -s "https://raw.githubusercontent.com/orlandovald/arcade1up/master/prerequisites.sh" | bash`
+curl -s "https://raw.githubusercontent.com/orlandovald/arcade1up/master/prerequisites.sh" | bash
 ```
