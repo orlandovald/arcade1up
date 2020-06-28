@@ -60,4 +60,8 @@ else
 fi
 
 echo
+echo "Make sure the configured button is connected to the right pins in the GPIO board and then reboot"
+echo "To reboot run the below command:"
+echo "     sudo reboot"
+echo
 echo "Finished setup"
