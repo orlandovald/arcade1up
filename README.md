@@ -8,3 +8,5 @@ Just `ssh` into your Pi and run the below,
 bash <(curl -s https://raw.githubusercontent.com/orlandovald/arcade1up/master/setup.sh)
 ```
 The script will install all the required dependencies, will clone this repo and configure the scripts to be executed during startup.
+
+The default volume configuration for pins and volume levels can be changed manually in the `config.ini` file after the setup is complete.
