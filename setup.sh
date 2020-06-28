@@ -3,6 +3,9 @@
 # Global variables
 ROOT_DIR="/home/pi/arcade1up"
 GITHUB_REPO="https://github.com/orlandovald/arcade1up.git"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
 
 echo "*** Installing prerequisites ***"
 echo
@@ -34,13 +37,13 @@ then
   then
     sudo sed -i.bakp "/^exit 0/i $POWER_SCRIPT_CMD" "$RC_LOCAL_FILE"
     echo "Power switch script has been configured"
-    echo "*** Make sure your power button is connected to pins 5 & 6 ***"
+    echo "${RED}*** Make sure your power button is connected to pins 5 & 6 ***${NC}"
   else
     echo "Skipped power switch configuration"
   fi  
 else 
   echo "Power switch script is already configured"
-  echo "*** Make sure your power button is connected to pins 5 & 6 ***"
+  echo "${RED}*** Make sure your power button is connected to pins 5 & 6 ***${NC}"
 fi
 
 echo
@@ -54,16 +57,21 @@ then
   then
     sudo sed -i.bakv "/^exit 0/i $VOLUME_SCRIPT_CMD" "$RC_LOCAL_FILE"
     echo "Volume switch script has been configured"
+    echo "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
+    echo "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
   else
     echo "Skipped volume switch configuration"
   fi
 else
   echo "Volume switch script is already configured"
+  echo "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
+  echo "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
   
 fi
 
 echo
-echo "Now is a good time to reboot, run the below command for that:"
-echo "     sudo reboot"
+echo "If you need to change defult pin values in config.ini do that now. Otherwise, reboot."
+echo
+echo "${GREEN}     sudo reboot${NC}"
 echo
 echo "Finished setup"
