@@ -7,12 +7,12 @@ import ConfigParser
 
 config = ConfigParser.ConfigParser()
 config.read("/home/pi/arcade1up/config.ini")
-pinLow = config.get('volume', 'pinLow')
-pinHigh = config.get('volume', 'pinHigh')
+pinLow = config.getint('volume', 'pinLow')
+pinHigh = config.getint('volume', 'pinHigh')
 
-volLow = config.get('volume', 'volLow')
-volMid = config.get('volume', 'volMid')
-volHigh = config.get('volume', 'volHigh')
+volLow = config.getint('volume', 'volLow')
+volMid = config.getint('volume', 'volMid')
+volHigh = config.getint('volume', 'volHigh')
 
 
 def cleanup(sig, frame):
