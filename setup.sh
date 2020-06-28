@@ -37,13 +37,13 @@ then
   then
     sudo sed -i.bakp "/^exit 0/i $POWER_SCRIPT_CMD" "$RC_LOCAL_FILE"
     echo "Power switch script has been configured"
-    echo "${RED}*** Make sure your power button is connected to pins 5 & 6 ***${NC}"
+    echo -e "${RED}*** Make sure your power button is connected to pins 5 & 6 ***${NC}"
   else
     echo "Skipped power switch configuration"
   fi  
 else 
   echo "Power switch script is already configured"
-  echo "${RED}*** Make sure your power button is connected to pins 5 & 6 ***${NC}"
+  echo -e "${RED}*** Make sure your power button is connected to pins 5 & 6 ***${NC}"
 fi
 
 echo
@@ -57,21 +57,21 @@ then
   then
     sudo sed -i.bakv "/^exit 0/i $VOLUME_SCRIPT_CMD" "$RC_LOCAL_FILE"
     echo "Volume switch script has been configured"
-    echo "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
-    echo "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
+    echo -e "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
+    echo -e "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
   else
     echo "Skipped volume switch configuration"
   fi
 else
   echo "Volume switch script is already configured"
-  echo "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
-  echo "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
+  echo -e "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
+  echo -e "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
   
 fi
 
 echo
 echo "If you need to change defult pin values in config.ini do that now. Otherwise, reboot."
 echo
-echo "${GREEN}     sudo reboot${NC}"
+echo -e "${GREEN}     sudo reboot${NC}"
 echo
 echo "Finished setup"
