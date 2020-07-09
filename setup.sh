@@ -2,6 +2,7 @@
 
 # Global variables
 ROOT_DIR="/home/pi/arcade1up"
+SCRIPTS_DIR="${ROOT_DIR}/scripts"
 GITHUB_REPO="https://github.com/orlandovald/arcade1up.git"
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -25,8 +26,8 @@ echo "*** Prerequisites have been installed ***"
 echo
 
 RC_LOCAL_FILE="/etc/rc.local"
-POWER_SCRIPT_CMD="sudo python $ROOT_DIR/power.py &"
-VOLUME_SCRIPT_CMD="python $ROOT_DIR/volume.py &"
+POWER_SCRIPT_CMD="sudo python $SCRIPTS_DIR/power.py &"
+VOLUME_SCRIPT_CMD="python $SCRIPTS_DIR/volume.py &"
 
 grep -q -F "$POWER_SCRIPT_CMD" "$RC_LOCAL_FILE"
 if [ $? -ne 0 ]; 

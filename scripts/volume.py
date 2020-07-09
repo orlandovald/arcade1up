@@ -6,7 +6,7 @@ import signal
 import ConfigParser
 
 config = ConfigParser.ConfigParser()
-config.read("/home/pi/arcade1up/config.ini")
+config.read("/home/pi/arcade1up/config/config.ini")
 pinLow = config.getint('volume', 'pinLow')
 pinHigh = config.getint('volume', 'pinHigh')
 
