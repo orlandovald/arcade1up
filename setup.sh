@@ -15,11 +15,24 @@ sudo apt-get update
 sudo apt-get -y install git python-pip
 pip install RPi.GPIO
 
-# Create root directory
-mkdir -p "${ROOT_DIR}"
+echo
 
-# Clone repo
-git clone "${GITHUB_REPO}" "${ROOT_DIR}"
+if [ ! -d ${ROOT_DIR} ];
+then
+  # Create root directory
+  mkdir -p ${ROOT_DIR}
+  # Clone repo
+  git clone ${GITHUB_REPO} ${ROOT_DIR}
+  # Set dummy user to be able to stash/pull
+  git -C ${ROOT_DIR} config user.name "someone"
+  git -C ${ROOT_DIR} config user.email "someone@retropie.com"
+  echo -e "${GREEN}Repo cloned at ${ROOT_DIR} ${NC}"
+else
+  git -C ${ROOT_DIR} stash
+  git -C ${ROOT_DIR} pull
+  git -C ${ROOT_DIR} stash pop
+  echo -e "${GREEN}Repo already cloned, updated instead${NC}"
+fi
 
 echo
 echo "*** Prerequisites have been installed ***"
