@@ -33,7 +33,7 @@ RELAY_SCRIPT_CMD="python $SCRIPTS_DIR/relay.py"
 grep -q -F "$POWER_SCRIPT_CMD" "$RC_LOCAL_FILE"
 if [ $? -ne 0 ]; 
 then
-  read -p "Press 'Y' to configure the ${GREEN}power switch${NC} script: " -n 1 -r
+  read -p "Press 'Y' to configure the POWER SWITCH script: " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
@@ -53,7 +53,7 @@ echo
 grep -q -F "$VOLUME_SCRIPT_CMD" "$RC_LOCAL_FILE"
 if [ $? -ne 0 ]; 
 then
-  read -p "Press 'Y' to configure the ${GREEN}volume switch${NC} script: " -n 1 -r
+  read -p "Press 'Y' to configure the VOLUME SWITCH script: " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
@@ -75,7 +75,7 @@ echo
 grep -q -F "$RELAY_SCRIPT_CMD" "$RC_LOCAL_FILE"
 if [ $? -ne 0 ]; 
 then
-  read -p "Press 'Y' to configure the ${GREEN}power relay${NC} script: " -n 1 -r
+  read -p "Press 'Y' to configure the POWER RELAY script: " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
