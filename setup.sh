@@ -28,11 +28,12 @@ echo
 RC_LOCAL_FILE="/etc/rc.local"
 POWER_SCRIPT_CMD="sudo python $SCRIPTS_DIR/power.py &"
 VOLUME_SCRIPT_CMD="python $SCRIPTS_DIR/volume.py &"
+RELAY_SCRIPT_CMD="python $SCRIPTS_DIR/relay.py"
 
 grep -q -F "$POWER_SCRIPT_CMD" "$RC_LOCAL_FILE"
 if [ $? -ne 0 ]; 
 then
-  read -p "Press 'Y' to configure the power switch script: " -n 1 -r
+  read -p "Press 'Y' to configure the ${GREEN}power switch${NC} script: " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
@@ -52,26 +53,47 @@ echo
 grep -q -F "$VOLUME_SCRIPT_CMD" "$RC_LOCAL_FILE"
 if [ $? -ne 0 ]; 
 then
-  read -p "Press 'Y' to configure the power switch script: " -n 1 -r
+  read -p "Press 'Y' to configure the ${GREEN}volume switch${NC} script: " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
     sudo sed -i.bakv "/^exit 0/i $VOLUME_SCRIPT_CMD" "$RC_LOCAL_FILE"
     echo "Volume switch script has been configured"
     echo -e "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
-    echo -e "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
+    echo -e "${RED} *** Edit config/config.ini file to change pin and volume level defaults ***${NC}"
   else
     echo "Skipped volume switch configuration"
   fi
 else
   echo "Volume switch script is already configured"
   echo -e "${RED} *** Default pin configuration is LOW=18 and MAX=16 ***"
-  echo -e "${RED} *** Edit config.ini file to change pin and volume level defaults ***${NC}"
-  
+  echo -e "${RED} *** Edit config/config.ini file to change pin and volume level defaults ***${NC}"
 fi
 
 echo
-echo "If you need to change defult pin values in config.ini do that now. Otherwise, reboot."
+
+grep -q -F "$RELAY_SCRIPT_CMD" "$RC_LOCAL_FILE"
+if [ $? -ne 0 ]; 
+then
+  read -p "Press 'Y' to configure the ${GREEN}power relay${NC} script: " -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+    sudo sed -i.bakv "/^exit 0/i $RELAY_SCRIPT_CMD" "$RC_LOCAL_FILE"
+    echo "Power relay script has been configured"
+    echo -e "${RED} *** Default pin configuration is PIN 22 ***"
+    echo -e "${RED} *** Edit config/config.ini file to change pin default number ***${NC}"
+  else
+    echo "Skipped power relay configuration"
+  fi
+else
+  echo "Power relay script is already configured"
+  echo -e "${RED} *** Default pin configuration is PIN 22 ***"
+  echo -e "${RED} *** Edit config/config.ini file to change pin default number ***${NC}"
+fi
+
+echo
+echo "If you need to change defult pin values in config/config.ini do that NOW. Otherwise, reboot."
 echo
 echo -e "${GREEN}     sudo reboot${NC}"
 echo
