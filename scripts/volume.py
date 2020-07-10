@@ -2,6 +2,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 from subprocess import call
+from subprocess import check_output
 import signal
 import ConfigParser
 
@@ -32,6 +33,15 @@ GPIO.setup(pinHigh, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 currentVolume = 0
 
+device = 'PCM'
+controls = check_output(["amixer", "scontrols"])
+if 'HDMI' in controls:
+    device = 'HDMI'
+elif 'Master' in controls:
+    device = 'Master'
+
+print("Using device = " + device)
+
 loop = True
 while loop:
     pinMinState = GPIO.input(pinLow)
@@ -47,7 +57,7 @@ while loop:
         newVolume = volMid
 
     if currentVolume != newVolume:
-        call(["amixer", "set", "PCM", str(newVolume) + "%"])
+        call(["amixer", "set", device, str(newVolume) + "%"])
         currentVolume = newVolume
     sleep(1)
 
