@@ -19,7 +19,7 @@ while loop:
     GPIO.wait_for_edge(THE_PIN, GPIO.BOTH)
     currentState = GPIO.input(THE_PIN)
     if previousState != currentState and currentState == OFF_STATE:
-        subprocess.call("shutdown -h now", shell=True,
+        subprocess.call(["bash", "/home/pi/arcade1up/scripts/shutdown.sh"], shell=True,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         loop = False
     else:
