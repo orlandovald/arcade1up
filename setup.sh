@@ -41,7 +41,6 @@ echo
 RC_LOCAL_FILE="/etc/rc.local"
 POWER_SCRIPT_CMD="sudo python $SCRIPTS_DIR/power.py &"
 VOLUME_SCRIPT_CMD="python $SCRIPTS_DIR/volume.py &"
-RELAY_SCRIPT_CMD="python $SCRIPTS_DIR/relay.py"
 
 grep -q -F "$POWER_SCRIPT_CMD" "$RC_LOCAL_FILE"
 if [ $? -ne 0 ]; 
@@ -85,14 +84,15 @@ fi
 
 echo
 
-grep -q -F "$RELAY_SCRIPT_CMD" "$RC_LOCAL_FILE"
+systemctl -all | grep arcade1up-relay.service > /dev/null
 if [ $? -ne 0 ]; 
 then
   read -p "Press 'Y' to configure the POWER RELAY script: " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
-    sudo sed -i.bakv "/^exit 0/i $RELAY_SCRIPT_CMD" "$RC_LOCAL_FILE"
+    sudo systemctl enable /home/pi/arcade1up/scripts/arcade1up-relay.service
+    sudo systemctl daemon-reload
     echo "Power relay script has been configured"
     echo -e "${RED} *** Default pin configuration is PIN 22 ***"
     echo -e "${RED} *** Edit config/config.ini file to change pin default number ***${NC}"

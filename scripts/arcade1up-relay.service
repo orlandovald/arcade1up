@@ -1,0 +1,10 @@
+[Unit]
+Description=Arcade1up power relay activation
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /home/pi/arcade1up/scripts/relay.py
+
+[Install]
+WantedBy=local-fs.target
